@@ -14,8 +14,12 @@
   - Relevance on the market
     - Comparison with other options
   - Hibernate
+    - What is Hibernate
     - The Problem
+        - JDBC is difficult/boilerplate -> hibernate easy(er) to use less boilerplate, switching databases easier
+        - Optional dirty checking, performance tuning, caching, batch processing
         - How Hibernate solves it
+
     - Relevance on the market
     - Comparison with other options
     
