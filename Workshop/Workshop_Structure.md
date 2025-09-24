@@ -5,6 +5,9 @@
 - First Let people pull
 
 ## Presentation
+- First Let people pull
+
+## Presentation
 
 20 Min
 
@@ -57,7 +60,31 @@
 - Projects with all Checkpoint states
 
 ## The Challenges (Assignment)
+## Prerequisites Participants
 
+- What the participants needs
+- Docker Environment
+  - Springboot application / Use Spring initializer
+  - Database
+    - SQL Script for Creating tables and sample data (Maybe or just use Entities to migrate the Schema)
+
+## Prerequisites Presenters
+
+- Create Docker Image
+  - Springboot application / Use Spring initializer
+  - Database
+- SQL Script for Creating tables and sample data (Maybe or just use Entities to migrate the Schema)
+- Projects with all Checkpoint states
+
+## The Challenges (Assignment)
+
+- An idea for an application (ATM? TodoList)
+- Have Checkpoints
+- Have Goals to reach
+- Set 10 min timer to see where everybody is at
+  - Help where necessary
+  - If a problem is common -> Explain to everyone
+- 
 - An idea for an application (ATM? TodoList)
 - Have Checkpoints
 - Have Goals to reach
