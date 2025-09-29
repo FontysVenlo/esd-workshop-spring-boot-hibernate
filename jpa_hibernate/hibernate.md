@@ -4,7 +4,7 @@ Hibernate ORM is an object-relational mapping (ORM) library for Java. It helps m
 It supports operations like querying, saving, updating, and deleting entities in the database, while keeping your domain model in Java.
 
 JPA Compatibility:
-- Hibernate implements the Jakarta Persistence (JPA) specification. 
+- Hibernate implements the Jakarata Persistance (Previously known as Java Persistence API) (JPA) specification. 
 - You can use Hibernate in environments that expect JPA (Java SE, Java EE, or frameworks like Springboot). 
 
 Idiomatic Java:
