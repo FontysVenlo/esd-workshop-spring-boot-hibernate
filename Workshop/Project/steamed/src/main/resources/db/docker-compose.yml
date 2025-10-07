@@ -1,0 +1,33 @@
+
+services:
+  steamed_DB:
+    image: postgres:17.0
+    container_name: steamed
+    environment:
+      POSTGRES_USER: workshop
+      POSTGRES_PASSWORD: supersecret123
+      POSTGRES_DB: mydatabase
+    ports:
+      - "5433:5433"# DataSource settings
+  spring.datasource.url=jdbc:postgresql://localhost:5432/postgres
+  spring.datasource.username=postgres
+  spring.datasource.password=mysecretpassword
+  spring.datasource.driver-class-name=org.postgresql.Driver
+  
+  # Hibernate / JPA settings
+  spring.jpa.database-platform=org.hibernate.dialect.PostgreSQLDialect
+  spring.jpa.show-sql=true
+  spring.jpa.hibernate.ddl-auto=update
+  
+  # Optional: connection pool settings
+  spring.datasource.hikari.maximum-pool-size=10
+  spring.datasource.hikari.minimum-idle=2
+  spring.datasource.hikari.idle-timeout=30000
+  spring.datasource.hikari.max-lifetime=600000
+  spring.datasource.hikari.connection-timeout=30000
+
+volumes:
+      - postgres_data:/var/lib/postgresql/data
+  # docker run --name steamedDB -e POSTGRES_PASSWORD=mysecretpassword -d postgres
+volumes:
+  postgres_data:

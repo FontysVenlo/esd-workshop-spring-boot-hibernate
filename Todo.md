@@ -11,7 +11,7 @@ Florian:
 - Research
   - Get more sources
   - Expand document
-- Start working on how to containrize project 
+- Start working on how to containerize project
 - How to easily set it up for the participants
 
 Together (On Friday)
