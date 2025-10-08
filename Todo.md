@@ -16,8 +16,8 @@ Florian:
 
 Together (On Friday)
 
-- Decide on Project Idea (TODOLIST etc.)
-- Finish research
+- Think about the structure of the workshop
+- How to make it exciting (Gamify with a DB with sampe data (Retrieve certain values))
 
 # Until deadline
 - Upload first version of Presentation (At least)
@@ -26,3 +26,9 @@ Together (On Friday)
 - Have Assignment checkpoint projects ready
 - Planned the whole workshop
 
+PDP
+LG1
+activities
+-> Plan weekly how to reach
+-> Put links
+Same for LG2

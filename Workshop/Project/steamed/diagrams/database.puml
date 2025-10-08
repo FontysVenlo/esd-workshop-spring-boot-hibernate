@@ -13,6 +13,11 @@ entity User {
   created_at : TIMESTAMP
 }
 
+entity Library {
+    id: SERIAL
+
+}
+
 entity Game {
   id : SERIAL
   title : VARCHAR
@@ -53,8 +58,11 @@ entity Wishlist {
 }
 
 ' Relationships with 1..* notation
+Library "1" -- "1" User : has
+Library "0..*" -- "0..*" Game : has
 User "1" -- "0..*" Review : writes
 Game "1" -- "0..*" Review : has
+
 
 User "1" -- "0..*" Order : places
 Order "1" -- "0..*" OrderItem : contains
