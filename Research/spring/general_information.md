@@ -15,10 +15,6 @@
 
 ## 
 
-# Why springboot was created
-
-In order to explain the reason for the creation of spring boot, we first have to dive into the the reason for the creation of spring:
-
 # Origin Story of Spring
 
 - Enterprise Java (late 1990s–2000s)
