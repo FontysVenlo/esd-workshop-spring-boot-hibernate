@@ -1,32 +1,5 @@
-# Why springboot was created
+# Why it exists
 
-In order to explain the reason for the creation of spring boot, we first have to dive into the the reason for the creation of spring:
-
-# Origin Story of Spring
-
-- Enterprise Java (late 1990s–2000s)
-  - Servlets & JSP
-  - EJB (Enterprise Java Beans)
-  - J2EE (later Jakarta EE)
-
-- Spring Framework (2002–2003, Rod Johnson)
-  - Created to solve complexity of EJBs (Enterprise JavaBeans)
-  - Lightweight container, IoC, AOP
-  - Became dominant alternative to J2EE
-- Spring Boot (2014, Pivotal)
-  - Built on Spring Framework
-  - "Convention over configuration"
-  - Embedded Tomcat/Jetty/Undertow
-  - Auto-configuration
-  - Simplified microservices development
-    - Spring Cloud (2015+)
-      - Netflix OSS integrations
-      - Service discovery, config server
-      - Circuit breakers, load balancing
-    - Modern ecosystem
-      - Reactive stack (Spring WebFlux)
-      - Kubernetes & Cloud-native support
-      - GraalVM native images
 
 # Problems that Spring solves
 
@@ -69,3 +42,12 @@ Sources:
 ## Spring MVC (Web framework)
 
 Spring MVC enables java to act as a server for Webservices and offers essential functionalties such as defining REST APIs or offering Dynamic web page loading. It handles HTTP requests, provides controllers for routing which makes it quite powerfull and simplifies many coding challenges that a programmer might face when creating these functionalites themselves using plain Java.
+
+
+## 
+
+
+--
+
+References
+[REFERENCE 1](www..nl)
