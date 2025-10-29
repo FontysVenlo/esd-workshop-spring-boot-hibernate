@@ -1,14 +1,7 @@
 # Alternatives
 
 ## Java specific alternatives
-
-### Struts
-
-[Website](https://struts.apache.org/index.html)
-
-### Jakarta EE
-
-[Website](https://jakarta.ee/)
+The following alternatives are frameworks that are similiar by nature to java spring boot. They are both Java Frameworks that are suited for microservices.
 
 ### Micronaut
 
@@ -34,7 +27,7 @@
 -> Specialized for fast startup time and integration with kubernetes (Microservice)
 
 
-## Non Java alternatives
+## Non Java alternatives ? 
 
 ---
 

@@ -13,8 +13,13 @@ import java.util.List;
 @RestController
 @RequestMapping("/game")
 public class GameController {
-    @Autowired
+
     private GameService gameService;
+
+    public GameController(GameService gameService) {
+        this.gameService = gameService;
+    }
+
     @GetMapping
     public ResponseEntity<List<Game>> getAll(){
        return ResponseEntity.status(HttpStatus.CREATED).body(gameService.getAll());
