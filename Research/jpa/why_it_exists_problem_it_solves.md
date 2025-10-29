@@ -15,3 +15,5 @@ Later, when Java EE moved to the Eclipse Foundation, the name was changed to Jak
 [Jakarta EE](https://www.jakarta.ee)
 
 [What is Java Persistence API (JPA)](https://medium.com/@mavidev/what-is-java-persistence-api-jpa-4af42dc326bc)
+
+[Why and when use JPA](https://vladmihalcea.com/why-and-when-use-jpa/)
