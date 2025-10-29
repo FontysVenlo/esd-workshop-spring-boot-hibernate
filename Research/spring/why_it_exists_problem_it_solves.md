@@ -1,6 +1,5 @@
 # Why it exists
 
-
 # Problems that Spring solves
 
 Java, like almost all programming languages has some issues or drawbacks which come with it. the Jakarta EE (formerly kwown as Java Platform, Enterprise Edition / Java EE) tried to solve those issues, especially as the name suggests for enterprise level projects. However it brought its own problems and struggles which Spring tries to solve.
@@ -11,7 +10,7 @@ Java, like almost all programming languages has some issues or drawbacks which c
 
 ## Application Context and dependency injection
 
-A common problem in java is the managment of object instances within an application. If ONE class needs an instance of ONE other class that is no problem but once an application grows, dependencies and object instances become very intertwined and complex.
+A common problem in java is the management of object instances within an application. If ONE class needs an instance of ONE other class that is no problem but once an application grows, dependencies and object instances become very intertwined and complex.
 
 ### Business Classes
 
@@ -29,8 +28,6 @@ Instead of manually managing those business classes, it is possible to define th
 
 - [dependency Injection](https://en.wikipedia.org/wiki/Dependency_injection)
 
--
-
 ## Database Access and JDBC
 
 JDBC is widely known as being not that nice to work with. (also from personal experience) This is why Spring Abstracts the interaction with JDBC and makes it so that the user does not have to interact with it directly, while also providing essential database access mechanics such as transaction managment queriyng and so on.
@@ -43,9 +40,7 @@ Sources:
 
 Spring MVC enables java to act as a server for Webservices and offers essential functionalties such as defining REST APIs or offering Dynamic web page loading. It handles HTTP requests, provides controllers for routing which makes it quite powerfull and simplifies many coding challenges that a programmer might face when creating these functionalites themselves using plain Java.
 
-
-## 
-
+##
 
 --
 

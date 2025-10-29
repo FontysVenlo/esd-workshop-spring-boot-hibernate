@@ -13,7 +13,7 @@
 - Maven
 - Gradle
 
-## 
+##
 
 # Origin Story of Spring
 
@@ -40,4 +40,3 @@
       - Reactive stack (Spring WebFlux)
       - Kubernetes & Cloud-native support
       - GraalVM native images
-
