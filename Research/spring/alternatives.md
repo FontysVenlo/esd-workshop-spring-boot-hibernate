@@ -27,7 +27,7 @@ The following alternatives are frameworks that are similiar by nature to java sp
 -> Specialized for fast startup time and integration with kubernetes (Microservice)
 
 
-## Non Java alternatives ? 
+## Non Java alternatives ? WWW
 
 ---
 

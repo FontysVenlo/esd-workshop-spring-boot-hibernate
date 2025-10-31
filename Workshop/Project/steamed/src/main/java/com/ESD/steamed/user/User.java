@@ -1,18 +1,15 @@
 package com.ESD.steamed.user;
 
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.util.Date;
-
 @Entity
 @Data
-@Table()
+@Table(name = "steamed_user")
 @AllArgsConstructor
 @NoArgsConstructor
 public class User {
