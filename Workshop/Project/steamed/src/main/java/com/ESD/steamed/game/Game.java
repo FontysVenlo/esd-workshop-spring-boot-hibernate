@@ -1,9 +1,12 @@
 package com.ESD.steamed.game;
 
+import com.ESD.steamed.review.Review;
 import jakarta.persistence.*;
 import lombok.Data;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Data
@@ -27,6 +30,9 @@ public class Game {
 
     @Column(length = 100)
     private String developer;
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Review> reviews = new ArrayList<>();
 
     @Override
     public String toString() {

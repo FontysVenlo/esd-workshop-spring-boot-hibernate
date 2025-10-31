@@ -3,6 +3,7 @@ package com.ESD.steamed;
 import com.ESD.steamed.game.Game;
 import com.ESD.steamed.game.GameCreateDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
@@ -26,8 +27,8 @@ public class GameControllerTest {
     @Autowired
     private ObjectMapper objectMapper;
 
-
     @Test
+    @Transactional
     void testCreateAndGetGame() throws Exception {
 
         GameCreateDTO newGame = new GameCreateDTO();
