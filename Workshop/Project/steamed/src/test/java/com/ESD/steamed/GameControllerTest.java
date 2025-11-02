@@ -2,6 +2,8 @@ package com.ESD.steamed;
 
 import com.ESD.steamed.game.Game;
 import com.ESD.steamed.game.GameCreateDTO;
+import com.ESD.steamed.review.Review;
+import com.ESD.steamed.review.ReviewCreateDTO;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
 import org.junit.jupiter.api.Test;
@@ -13,6 +15,7 @@ import org.springframework.test.web.servlet.MockMvc;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
@@ -59,5 +62,46 @@ public class GameControllerTest {
                 .andExpect(jsonPath("$.price").value(14.99))
                 .andExpect(jsonPath("$.developer").value("Team Cherry"))
                 .andExpect(jsonPath("$.releaseDate").value("2017-02-24"));
+    }
+
+    @Test
+    @Transactional
+    void testCreateReviewForGame() throws Exception {
+
+        GameCreateDTO newGame = new GameCreateDTO();
+        newGame.setTitle("Hollow Knight");
+        newGame.setDescription("Epic 2D action-platformer with exploration and tight combat.");
+        newGame.setPrice(new BigDecimal("14.99"));
+        newGame.setReleaseDate(LocalDate.of(2017, 2, 24));
+        newGame.setDeveloper("Team Cherry");
+
+        String gameResponse = mockMvc.perform(post("/games")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(newGame)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Hollow Knight"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        Long gameId = objectMapper.readTree(gameResponse).get("id").asLong();
+
+        ReviewCreateDTO reviewCreateDTO = new ReviewCreateDTO();
+        reviewCreateDTO.setTitle("Awesome Game");
+        reviewCreateDTO.setRating(3L);
+        reviewCreateDTO.setComment("Really enjoyed it!");
+        reviewCreateDTO.setCreatedAt(LocalTime.now());
+        reviewCreateDTO.setGameId(gameId);
+
+        String reviewResponse = mockMvc.perform(post("/games/{id}/reviews", gameId)
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(reviewCreateDTO)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Hollow Knight"))
+                .andExpect(jsonPath("$.rating").value(3))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
     }
 }

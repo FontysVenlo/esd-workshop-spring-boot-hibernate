@@ -1,6 +1,7 @@
 package com.ESD.steamed.review;
 
 import com.ESD.steamed.game.GameDTO;
+import com.ESD.steamed.user.UserDTO;
 import lombok.Data;
 
 import java.time.LocalTime;
@@ -14,4 +15,6 @@ public class ReviewDTO {
     private String comment;
     private LocalTime createdAt;
     private GameDTO gameDTO;
+    private UserDTO userDTO;
+
 }

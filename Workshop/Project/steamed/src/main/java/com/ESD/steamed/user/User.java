@@ -1,6 +1,7 @@
 package com.ESD.steamed.user;
 
 
+import com.ESD.steamed.review.Review;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
@@ -25,8 +26,8 @@ public class User {
     @NotNull
     private String password_hash;
 
-
-
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Review review;
 
     public User(@NotNull String username, @NotNull String email, @NotNull String password_hash) {
         this.username = username;

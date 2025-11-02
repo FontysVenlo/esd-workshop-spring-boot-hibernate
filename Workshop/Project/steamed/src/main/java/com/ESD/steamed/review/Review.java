@@ -41,4 +41,8 @@ public class Review {
     @JoinColumn(name = "game_id")
     private Game game;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
+
 }

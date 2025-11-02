@@ -1,5 +1,7 @@
 package com.ESD.steamed.game;
 
+import com.ESD.steamed.review.ReviewCreateDTO;
+import com.ESD.steamed.review.ReviewDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +26,11 @@ public class GameController {
     @PostMapping
     public ResponseEntity<GameDTO> create(@RequestBody GameCreateDTO gameCreateDTO){
         return ResponseEntity.ok(gameService.create(gameCreateDTO));
+    }
+
+    @PostMapping(path = "/{id}/reviews")
+    public ResponseEntity<ReviewDTO> createReviewForGame(@PathVariable Long gameId, @RequestBody ReviewCreateDTO reviewCreateDTO){
+        return ResponseEntity.ok(gameService.createReviewForGame(gameId,reviewCreateDTO));
     }
 
     @GetMapping(path = "/{id}")

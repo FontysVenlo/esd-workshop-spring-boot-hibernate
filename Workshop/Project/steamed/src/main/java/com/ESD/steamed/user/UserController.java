@@ -9,9 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 @RequestMapping("User")
 public class UserController {
+
     private UserService userService;
     @PostMapping
     public ResponseEntity<UserDTO> save(@RequestBody UserCreateDTO userCreateDTO){
         return userService.save(userCreateDTO);
+
     }
 }

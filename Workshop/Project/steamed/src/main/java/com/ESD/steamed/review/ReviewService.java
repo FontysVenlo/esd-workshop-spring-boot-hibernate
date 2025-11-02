@@ -15,10 +15,10 @@ public class ReviewService {
     private final ReviewMapper reviewMapper;
 
 
-    /*public List<ReviewDTO> getAllById(Long id){
-        List <Review> listOfReviews = reviewRepository.findAll();
+    public List<ReviewDTO> getAllByGameId(Long gameId){
+        List<Review> listOfReviews = reviewRepository.findAll();
         return reviewMapper.toDTOList(listOfReviews);
-    }*/
+    }
 
     public ReviewDTO create(ReviewCreateDTO reviewCreateDTO){
         Game game = gameRepository.findById(reviewCreateDTO.getGameId())
@@ -31,4 +31,5 @@ public class ReviewService {
                 .orElseThrow(() ->
                         new ResourceNotFoundException("Review not found.")));
     }
+
 }

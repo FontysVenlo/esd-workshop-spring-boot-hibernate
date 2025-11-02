@@ -1,6 +1,7 @@
 package com.ESD.steamed.review;
 
 import com.ESD.steamed.game.Game;
+import com.ESD.steamed.game.GameDTO;
 import com.ESD.steamed.game.GameMapper;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -38,6 +39,30 @@ public class ReviewMapper {
         review.setCreated_at(reviewCreateDTO.getCreatedAt());
         review.setGame(game);
         return review;
+    }
+
+    public Review toEntity(ReviewDTO reviewDTO, Game game) {
+        if (reviewDTO == null) return null;
+
+        Review review = new Review();
+        review.setTitle(reviewDTO.getTitle());
+        review.setRating(reviewDTO.getRating());
+        review.setComment(reviewDTO.getComment());
+        review.setCreated_at(reviewDTO.getCreatedAt());
+        review.setGame(game);
+        return review;
+    }
+
+    public ReviewDTO toDto(ReviewCreateDTO reviewCreateDTO, GameDTO game) {
+        if (reviewCreateDTO == null) return null;
+
+        ReviewDTO reviewDTO = new ReviewDTO();
+        reviewDTO.setTitle(reviewCreateDTO.getTitle());
+        reviewDTO.setRating(reviewCreateDTO.getRating());
+        reviewDTO.setComment(reviewCreateDTO.getComment());
+        reviewDTO.setCreatedAt(reviewCreateDTO.getCreatedAt());
+        reviewDTO.setGameDTO(game);
+        return reviewDTO;
     }
 
     public List<Review> toEntityList(List<ReviewCreateDTO> reviewCreateDTOList, Game game) {
