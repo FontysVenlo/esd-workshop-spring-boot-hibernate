@@ -8,6 +8,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Entity
 @Data
 @Table(name = "steamed_user")
@@ -27,7 +29,7 @@ public class User {
     private String password_hash;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Review review;
+    private List<Review> review;
 
     public User(@NotNull String username, @NotNull String email, @NotNull String password_hash) {
         this.username = username;

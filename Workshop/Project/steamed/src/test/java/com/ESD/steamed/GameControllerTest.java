@@ -86,19 +86,23 @@ public class GameControllerTest {
 
         Long gameId = objectMapper.readTree(gameResponse).get("id").asLong();
 
+        LocalTime time = LocalTime.of(12, 0);
+
         ReviewCreateDTO reviewCreateDTO = new ReviewCreateDTO();
         reviewCreateDTO.setTitle("Awesome Game");
         reviewCreateDTO.setRating(3L);
         reviewCreateDTO.setComment("Really enjoyed it!");
-        reviewCreateDTO.setCreatedAt(LocalTime.now());
+        reviewCreateDTO.setCreatedAt(time);
         reviewCreateDTO.setGameId(gameId);
 
         String reviewResponse = mockMvc.perform(post("/games/{id}/reviews", gameId)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(reviewCreateDTO)))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Hollow Knight"))
+                .andExpect(jsonPath("$.title").value("Awesome Game"))
                 .andExpect(jsonPath("$.rating").value(3))
+                .andExpect(jsonPath("$.comment").value("Really enjoyed it!"))
+                .andExpect(jsonPath("$.createdAt").value("12:00:00"))
                 .andReturn()
                 .getResponse()
                 .getContentAsString();

@@ -29,8 +29,8 @@ public class GameController {
     }
 
     @PostMapping(path = "/{id}/reviews")
-    public ResponseEntity<ReviewDTO> createReviewForGame(@PathVariable Long gameId, @RequestBody ReviewCreateDTO reviewCreateDTO){
-        return ResponseEntity.ok(gameService.createReviewForGame(gameId,reviewCreateDTO));
+    public ResponseEntity<ReviewDTO> createReviewForGame(@PathVariable Long id, @RequestBody ReviewCreateDTO reviewCreateDTO){
+        return ResponseEntity.ok(gameService.createReviewForGame(id,reviewCreateDTO));
     }
 
     @GetMapping(path = "/{id}")
