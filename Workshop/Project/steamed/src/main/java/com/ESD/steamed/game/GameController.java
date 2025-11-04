@@ -37,4 +37,7 @@ public class GameController {
     public ResponseEntity<GameDTO> getById(@PathVariable Long id){
         return ResponseEntity.ok(gameService.getById(id));
     }
+
+
+
 }
