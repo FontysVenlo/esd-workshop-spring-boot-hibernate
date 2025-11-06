@@ -12,7 +12,7 @@ These frameworks provide ORM functionality similar to JPA but without relying on
 ## SQL Mappers / Query Builders
 Frameworks that let developers work closer to SQL while still providing convenient APIs for mapping results.
 
-- **JDBI**: Open Source library that uses lambda expresions and reflection to create a higher level interface than JDBC.
+- **JDBI**: Open Source library that uses lambda expressions and reflection to create a higher level interface than JDBC.
 - **jOOQ**: Type-safe SQL query builder that generates Java code from your database schema, allowing native java-like database querying.  
 
 ---
