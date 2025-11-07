@@ -1,5 +1,8 @@
 package com.ESD.steamed.user;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class UserMapper {
 
     public UserDTO toDto(User user){

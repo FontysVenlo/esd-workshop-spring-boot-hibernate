@@ -13,7 +13,6 @@ entity User {
   created_at : TIMESTAMP
 }
 
-
 entity Game {
   id : SERIAL
   title : VARCHAR
@@ -32,9 +31,19 @@ entity Review {
   created_at : TIMESTAMP
 }
 
+entity Library {
+  id : SERIAL
+  user_id : INT
+  game_id : INT
+  rating : INT
+  comment : TEXT
+  created_at : TIMESTAMP
+}
+
 ' Relationships with 1..* notation
 User "1" -- "0..*" Review : writes
 Game "1" -- "0..*" Review : has
-
+Library "1" -- "0..*" Game : has
+User "1" - "1" Library : owns
 @enduml
 ----

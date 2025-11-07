@@ -1,5 +1,6 @@
 package com.ESD.steamed.game;
 
+import com.ESD.steamed.userGame.UserGame;
 import com.ESD.steamed.review.Review;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -33,6 +34,9 @@ public class Game {
 
     @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Review> reviews = new ArrayList<>();
+
+    @OneToMany(mappedBy = "game", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<UserGame> libraryEntries = new ArrayList<>();
 
     @Override
     public String toString() {
