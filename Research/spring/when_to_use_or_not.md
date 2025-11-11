@@ -22,5 +22,8 @@ Spring Boot should not be used in small projects or projects in which it is cert
 --
 
 References
-[REFERENCE 1](www..nl)
+
+[Baeldung](https://www.baeldung.com/spring-why-to-choose)
+
 [spring-boot-quarkus-or-micronaut-your-guide-through-the-java-framework-jungle](https://hiq.se/en/insight/spring-boot-quarkus-or-micronaut-your-guide-through-the-java-framework-jungle/)
+

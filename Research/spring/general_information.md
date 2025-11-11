@@ -17,6 +17,11 @@
 
 # Origin Story of Spring
 
+- First created in 2003 
+- By Rod Johnson
+
+# Timeline 
+
 - Enterprise Java (late 1990s–2000s)
   - Servlets & JSP
   - EJB (Enterprise Java Beans)
@@ -40,3 +45,9 @@
       - Reactive stack (Spring WebFlux)
       - Kubernetes & Cloud-native support
       - GraalVM native images
+
+Sources:
+
+[Wikipedia](https://en.wikipedia.org/wiki/Spring_Framework)
+
+[Spring Overview](https://docs.spring.io/spring-framework/reference/overview.html)
