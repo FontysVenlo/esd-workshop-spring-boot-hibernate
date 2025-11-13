@@ -17,13 +17,20 @@ Spring Boot should not be used in small projects or projects in which it is cert
   - Complexity of Spring and Boot
     - Spring itself already introduces several layers of abstraction for   different aspects of the Software such as JPA, Spring JPA. This can be quite confusing for developers and takes time to really understand. -> It is an investment that usually pays off
 
-##
+## Examples
+
+Sofa Project for disaplying a campus map. Where most of the technical difficulty comes from digitilizing a map and displaying it in the frontend. -> Not a good fit as it is probably overkill for such a project.
+
+New project for managing Bank accounts using a Microservice Architecture  which is expected to grow significantely in the future -> Might be a great fit (it still depends on the projects requirements as always)
+
+
 
 --
 
 References
 
-[Baeldung](https://www.baeldung.com/spring-why-to-choose)
+HiQ (n.d.) Spring Boot, Quarkus or Micronaut? Your Guide Through the Java Framework Jungle. Available at: https://hiq.se/en/insight/spring-boot-quarkus-or-micronaut-your-guide-through-the-java-framework-jungle/
+ (Accessed: 13 November 2025).
 
-[spring-boot-quarkus-or-micronaut-your-guide-through-the-java-framework-jungle](https://hiq.se/en/insight/spring-boot-quarkus-or-micronaut-your-guide-through-the-java-framework-jungle/)
-
+Baeldung (n.d.) Why Choose Spring Boot? Available at: https://www.baeldung.com/spring-why-to-choose
+ (Accessed: 13 November 2025).
