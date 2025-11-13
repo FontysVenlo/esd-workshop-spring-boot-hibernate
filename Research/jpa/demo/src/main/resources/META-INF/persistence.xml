@@ -1,9 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <persistence xmlns="https://jakarta.ee/xml/ns/persistence" version="3.0">
-    <persistence-unit name="examplePU">
+    <!-- The name of the persistence unit will later be used to create a persistence unit -->
+    <persistence-unit name="examplePU"> 
+        <!-- Add all classes that should be included in the persistence unit -->
         <class>User</class>
         <class>Post</class>
 
+        <!-- Set up the database connection and jpa provider -->
         <properties>
             <!-- db connection -->
             <property name="jakarta.persistence.jdbc.driver" value="org.postgresql.Driver"/>
