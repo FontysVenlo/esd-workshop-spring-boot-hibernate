@@ -1,0 +1,59 @@
+@startuml
+title Steamed - Spring Architecture Diagram
+
+' Define component styles
+skinparam component {
+    BackgroundColor<<Controller>> LightBlue
+    BorderColor<<Controller>> Blue
+    BackgroundColor<<Service>> LightGreen
+    BorderColor<<Service>> DarkGreen
+    BackgroundColor<<Repository>> LightYellow
+    BorderColor<<Repository>> Orange
+    FontColor Black
+    FontSize 12
+}
+
+package "Spring Backend" {
+
+    package "API Endpoints" {
+        [GameController] <<Controller>>
+        [ReviewController] <<Controller>>
+        [UserGameController] <<Controller>>
+        [UserController] <<Controller>>
+    }
+
+    package "Logic" {
+        [GameServiceBackend] <<Service>>
+        [ReviewServiceBackend] <<Service>>
+        [UserGameServiceBackend] <<Service>>
+        [UserServiceBackend] <<Service>>
+    }
+
+    package "DB Manager" {
+        [GameRepository] <<Repository>>
+        [ReviewRepository] <<Repository>>
+        [UserGameRepository] <<Repository>>
+        [UserRepository] <<Repository>>
+    }
+
+    GameController --> GameServiceBackend : "Receives HTTP request\n→ Calls business logic"
+    GameServiceBackend --> GameRepository : "Requests data\n→ Applies logic"
+
+    ReviewController --> ReviewServiceBackend 
+    ReviewServiceBackend --> ReviewRepository
+    UserGameController --> UserGameServiceBackend
+    UserGameServiceBackend --> UserGameRepository
+    UserController --> UserServiceBackend
+    UserServiceBackend --> UserRepository
+}
+
+package Database {
+    [SteamedDatabase]
+}
+
+GameRepository --> SteamedDatabase : "Executes SQL\n(SELECT/INSERT/DELETE)"
+ReviewRepository --> SteamedDatabase 
+UserGameRepository --> SteamedDatabase 
+UserRepository --> SteamedDatabase 
+
+@enduml
