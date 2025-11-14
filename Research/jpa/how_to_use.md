@@ -1,59 +1,17 @@
 # How to use
 
+This file shows the (possible) structure of a JPA implementation, the explanations of how JPA is used are present in comments in the files below. <br>
+However, there are many more possible functions and annotations available, many of these are available in the sources at the bottom of this file. 
 
-## Basic use
-- Entities: using JPA annotations create the dataclass, 
+- [resources\META-INF\persistence.xml](demo/src/main/resources/META-INF/persistence.xml): Defines which classes JPA tracks, database connection and provider
 
-```java
-import jakarta.persistence.*;
+- Entity classes [Post](demo/src/main/java/Post.java) & [User](demo/src/main/java/User.java): Defines the fields, their constraints and relations
 
-@Entity
-@Table(name = "employees")
-public class Employee {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+- Data access objects or repositories [PostDao](demo/src/main/java/PostDao.java) & [UserDao](demo/src/main/java/UserDao.java): Encapsulate database access using JPA
 
-    private String name;
 
-    private String email;
-
-    // Constructors, getters, and setters
-}
-
-```
-- EntityManager: use the entity manager to manage the transaction and persist the data
-```java
-EntityManagerFactory emf = Persistence.createEntityManagerFactory("my-persistence-unit");
-
-EntityManager em = emf.createEntityManager();
-
-try {
-
-    em.getTransaction().begin();
-
-    Employee emp = new Employee("John Doe", "john.doe@example.com");
-
-    em.persist(emp);
-
-    em.getTransaction().commit();
-
-} catch (Exception e) {
-    if (em.getTransaction().isActive()) {
-        em.getTransaction().rollback();
-    }
-    e.printStackTrace();
-} finally {
-    em.close();
-    emf.close();
-}
-```
-
-## Sources:
+Sources used to create and comment the JPA demo project:
 - https://www.infoworld.com/article/2259807/what-is-jpa-introduction-to-the-java-persistence-api.html
 - https://www.geeksforgeeks.org/java/jpa-introduction/
 
-----
-
-References
-[REFERENCE 1](www..nl)
+- https://docs.spring.io/spring-data/jpa/reference/jpa.html

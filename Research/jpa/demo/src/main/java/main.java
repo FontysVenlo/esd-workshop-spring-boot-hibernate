@@ -19,6 +19,7 @@ public class main {
         }
 
         userDao.close();
+        postDao.close();
     }
 
 }
