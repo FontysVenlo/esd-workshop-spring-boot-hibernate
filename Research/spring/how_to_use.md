@@ -93,7 +93,7 @@ public class GameController {
 
     @GetMapping
     public ResponseEntity<List<GameDTO>> getAll(){
-       return ResponseEntity.status(HttpStatus.CREATED).body(gameService.getAll());
+       return ResponseEntity.ok(gameService.getAll());
        
        /* Explanation: This endpoint handles GET requests to /game.It calls the service, wraps the result in a ResponseEntity (Class for creating HTTP Responses), and sends it back as JSON.Spring automatically converts the List<GameDTO> into proper HTTP response with status code. */
     }
@@ -133,9 +133,9 @@ import java.util.List;
 public class GameService {
     private final GameRepository gameRepository;
 
-    public List<Game> getAll(){
-        List<Game> listOfGames = gameRepository.findAll();
-        return listOfGames; 
+    public List<GameDTO> getAll(){
+        List <Game> listOfGames = gameRepository.findAll();
+        return gameMapper.toDtoList(listOfGames);
         /* Explanation: This method asks the repository for all games and returns them.
        Right now it's simple, but this is where business logic lives — like filtering, sorting, or combining data.
        When we call gameService.getAll(), Spring runs the repository's findAll() under the hood. */
