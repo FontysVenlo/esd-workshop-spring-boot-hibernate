@@ -1,0 +1,54 @@
+@startuml
+title DTO Flow in Steamed
+
+
+package Controller {
+    class GameCreateDTO {
+        +name: String
+        +genre: String
+        +releaseDate: Date
+    }
+    note right of GameCreateDTO
+      Data Structure which comes IN to the Server
+    end note
+}
+
+package Service {
+    class Mapper {
+        +toEntity(GameCreateDTO: gameCreateDTO): GameDTO
+        +toDTO(entity: Game): GameDTO
+    }
+    note right of Mapper
+      Converts between DTOs and Entities
+    end note
+
+    class GameDTO {
+        +id: Long
+        +name: String
+        +genre: String
+        +releaseDate: Date
+    }
+    note right of GameDTO
+      Data Structure which goes OUT to the Client
+    end note
+}
+
+package Repository {
+    class Game {
+        +id: Long
+        +name: String
+        +genre: String
+        +releaseDate: Date
+    }
+    note right of Game
+      JPA Entity used for persistence
+    end note
+}
+
+
+GameCreateDTO --> Mapper : input
+Mapper --> Game : converts to Entity
+Game --> Mapper : converts to DTO
+Mapper --> GameDTO : output to Controller
+
+@enduml
