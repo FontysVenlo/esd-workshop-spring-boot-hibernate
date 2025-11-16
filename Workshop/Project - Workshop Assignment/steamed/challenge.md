@@ -2,7 +2,7 @@
 
 The Database Schema:
 
-![database.png](diagrams%2Fdatabase.png)()[]
+![database.png](diagrams/DBSchema.png)
 
 
 ## The assignment:
@@ -27,25 +27,10 @@ to finish the Challenge it is your choice! :) .
 # Part 1 Controllers POST and GET & DTOs
 
 1. First get a quick overview over the project. Read the comments and use other Models as reference on how to implement 
-things. If you dont remember a concept you can always have a look at our Guide: 
+things. If you dont remember a concept you can always have a look at our guide.
 2. Start with fixing the [GameController](src/main/java/com/ESD/steamed/game/GameController.java) a lot of stuff is missing here. Hint: Think about Annotations and services.
 
 * Now your [GameController](src/main/java/com/ESD/steamed/game/GameController.java) class should at least not complain about missing references and should be ready to handle incoming HTTP requests.
-
-
-***Solution***:
-```Java
-private final GameService gameService;
-
-    public GameController(GameService gameService) {
-        this.gameService = gameService;
-    }
-```
-
-```Java
-@RestController
-@RequestMapping("/games")
-```
 
 3. Okay the next thing we have to repair is the broken ```getAll()``` method in [GameController](src/main/java/com/ESD/steamed/game/GameController.java)
 . This method is supposed to return all wonderful Games that our Platform Steamed has to offer.
@@ -126,7 +111,7 @@ You can test your solutions against [GameControllerTest](src/test/java/com/ESD/s
 In the [GameRepository](src/main/java/com/ESD/steamed/game/GameRepository.java) class you need to define a method using Spring Data JPA which returns a List of games with the price lower than what is passed to the method. Within that file it is explained how to do so. But most important thing is, that Spring Data JPA allows you to write queries just by providing a method name In the [UserGame](src/main/java/com/ESD/steamed/userGame/UserGameRepository.java) Repository. there is a method for example which looks like this: ```List<UserGame> findByUser_Id(Long userId);``` it is needed to have this method because the UserGame entitty itself hold an id which is of course seperate from its userId or gameID. So in order to get a user´s library (List<UserGames> = is a Library) we have to have a method that returns all UserGames of a specific User. Which ```List<UserGame> findByUser_Id(Long userId);``` does. 
 
 
-4. Okay now that we have a way to retrieve all games that are below a certain price, go ahead and finish the ``getAllWithLowerPrice`()`` method in the [GameService](src/main/java/com/ESD/steamed/game/GameService.java). 
+4. Okay now that we have a way to retrieve all games that are below a certain price, go ahead and finish the ``getAllWithLowerPrice()`` method in the [GameService](src/main/java/com/ESD/steamed/game/GameService.java). 
 
 
 5. The final step is to change our existing ``getAll()`` is able to recieve a ``@RequestParameter`` (THIS IS NOT ``@RequestVariable`` or ``@PathVariable``) containing the maximum price (which needs to be optional). The controller then needs to either call ``getAllWithLowerPrice()`` or ``getAll()`` in the service depending on whether the ``maxPrice`` variable is present or not.

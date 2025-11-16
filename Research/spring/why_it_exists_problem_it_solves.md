@@ -2,7 +2,7 @@
 
 # Problems that Spring solves
 
-Java, like almost all programming languages has some issues or drawbacks which come with it. the Jakarta EE (formerly kwown as Java Platform, Enterprise Edition / Java EE) tried to solve those issues, especially as the name suggests for enterprise level projects. However it brought its own problems and struggles which Spring tries to solve (Spring, n.d.).
+Java, like almost all programming languages has some issues or drawbacks which come with it. the Jakarta EE (formerly known as Java Platform, Enterprise Edition / Java EE) tried to solve those issues, especially as the name suggests for enterprise level projects. However it brought its own problems and struggles which Spring tries to solve (Spring, n.d.).
 
 ## Application Context and dependency injection
 

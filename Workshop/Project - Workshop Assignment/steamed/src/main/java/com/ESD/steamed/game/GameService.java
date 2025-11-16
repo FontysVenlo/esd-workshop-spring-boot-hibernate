@@ -5,15 +5,12 @@ import com.ESD.steamed.review.ReviewCreateDTO;
 import com.ESD.steamed.review.ReviewDTO;
 import com.ESD.steamed.review.ReviewMapper;
 import com.ESD.steamed.review.ReviewRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.List;
 
 @Service
-@AllArgsConstructor
 public class GameService {
     private final GameRepository gameRepository;
     private final GameMapper gameMapper;

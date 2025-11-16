@@ -1,12 +1,11 @@
 package com.ESD.steamed.game;
 
-import com.ESD.steamed.review.ReviewCreateDTO;
-import com.ESD.steamed.review.ReviewDTO;
 import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 /*
