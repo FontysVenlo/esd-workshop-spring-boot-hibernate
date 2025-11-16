@@ -8,6 +8,7 @@ import com.ESD.steamed.review.ReviewRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -16,6 +17,16 @@ public class GameService {
     private final GameMapper gameMapper;
     private final ReviewRepository reviewRepository;
     private final ReviewMapper reviewMapper;
+
+    
+
+    public GameService(GameRepository gameRepository, GameMapper gameMapper, ReviewRepository reviewRepository,
+            ReviewMapper reviewMapper) {
+        this.gameRepository = gameRepository;
+        this.gameMapper = gameMapper;
+        this.reviewRepository = reviewRepository;
+        this.reviewMapper = reviewMapper;
+    }
 
     public List<GameDTO> getAll(){
         List <Game> listOfGames = gameRepository.findAll();

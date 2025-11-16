@@ -1,0 +1,18 @@
+{
+  "name": "Steamed Dev Environment",
+  "dockerFile": "Dockerfile",
+  "context": "..",
+  "forwardPorts": [8081, 5432],
+  "runServices": [],
+  "postCreateCommand": "mvn -q -e -B dependency:go-offline",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "pivotal.vscode-spring-boot",
+        "mhutchie.git-graph",
+        "redhat.vscode-yaml"
+      ]
+    }
+  }
+}
