@@ -61,7 +61,7 @@ industry. So when we are talking about ***Enterprise Software Development*** we 
 
 DTOs are there to make sure that you have ***complete control*** over the shape of your data in each part of your 
 application. There are many different reasons to use them but the one that made it click for me is ***security***. In our project
-we have a User Table containg ```Email```, ```Username``` and ```password```. So far so good. If we get this User ```Entity``` and return it as is,
+we have a User Table containing ```Email```, ```Username``` and ```password```. So far so good. If we get this User ```Entity``` and return it as is,
 we would actually expose our (hopefully hashed) ```password``` to the outside world.
 
 To make sure this does not happen we can create a ```UserDTO``` which only contains ```Email``` and ```Username```. And there you go! no exposure of sensitive data. This approach can also be taken for other reasons as explained in the next paragraph. But first a dancing cat to get your attention back on track. 
@@ -75,11 +75,11 @@ To make sure this does not happen we can create a ```UserDTO``` which only conta
 
 ---
 
-Below you see a diagram showing where each "type" of dto lives. The exact approach is the one I prefered / came up with and there is no right or wrong but simply based on preference. Any incoming request to the backend will be in the shape of an (EntityName)+CreateDTO. For this example lets use our ```Game entity```. In our ```GameCreateDTO``` we dont need to send an id because that id will be generated for us within the database. Makes sense right? So we will just leave it out in the CreateDTO. CreateDTOs are DTOs from which you create new objects / database entries. They only contain relevant data for that purpose.
+Below you see a diagram showing where each "type" of dto lives. The exact approach is the one I preferred / came up with and there is no right or wrong but simply based on preference. Any incoming request to the backend will be in the shape of an (EntityName)+CreateDTO. For this example lets use our ```Game entity```. In our ```GameCreateDTO``` we don't need to send an id because that id will be generated for us within the database. Makes sense right? So we will just leave it out in the CreateDTO. CreateDTOs are DTOs from which you create new objects / database entries. They only contain relevant data for that purpose.
 
-When we get a Game object from our database it comes in the form of an ```Entity```. Next to the reason of not wanting to expose sensitive data it could also be the case that you want to have a ***calculated value*** from two different tables or you want to have ***exact controll*** what you want to return to the Client. 
+When we get a Game object from our database it comes in the form of an ```Entity```. Next to the reason of not wanting to expose sensitive data it could also be the case that you want to have a ***calculated value*** from two different tables or you want to have ***exact control*** what you want to return to the Client. 
 
-Transformting these objects from ```CreateDTO``` to ```Entity``` from ``Entity`` To ```DTO``` and so on is the job of a ```Mapper``` class.
+Transforming these objects from ```CreateDTO``` to ```Entity``` from ``Entity`` To ```DTO``` and so on is the job of a ```Mapper``` class.
 
 And that is basically it. Have a look at the diagram below and move forward once you get the general idea. You wont have to do any mapping yourself you can always use the preexisting mapper classes for that. 
 
@@ -88,7 +88,7 @@ And that is basically it. Have a look at the diagram below and move forward once
 </details>
 
 
-Okay that was quite alot. Lets see if everything works by running the ``testCreateGame()`` ``testCreateGame()`` method in our [GameControllerTest.java](src/test/java/com/ESD/steamed/GameControllerTest.java) and ``testGetAllGames()``.
+Okay that was quite a lot. Lets see if everything works by running the ``testCreateGame()`` ``testCreateGame()`` method in our [GameControllerTest.java](src/test/java/com/ESD/steamed/GameControllerTest.java) and ``testGetAllGames()``.
 
 If the Test ran successfully **Congratulations!** you have reached the first Checkpoint! 
 
@@ -101,45 +101,29 @@ Up until now we have only worked within our GameController class. Lets see what 
 Once you have implemented the method you can test it via the ```testGetGameById()``` and ```testGetGameByWrongId()``` within the [GameControllerTest](src/test/java/com/ESD/steamed/GameControllerTest.java) class. 
 
 
-2. There is another method in the [GameService](src/main/java/com/ESD/steamed/game/GameService.java) class in which an existing Game is supposed to be updated. It should retrieve a ``GameCreateDTO`` and update an existing Game entity with the new Values. If you have finished the method you can also finish the existing ``updateById()`` method in the [GameController](src/main/java/com/ESD/steamed/game/GameController.java) class. In the Controller method you will have to use a PUT request which is exactly for that purpose. Updating records. In our Case we want to update a specific Game with new values. So you will have to give both an id AND a new Object to the controller.
+2. There is another method in the [GameService](src/main/java/com/ESD/steamed/game/GameService.java) class in which an existing Game is supposed to be updated. It should receive a ``GameCreateDTO`` and update an existing Game entity with the new Values. If you have finished the method you can also finish the existing ``updateById()`` method in the [GameController](src/main/java/com/ESD/steamed/game/GameController.java) class. In the Controller method you will have to use a PUT request which is exactly for that purpose. Updating records. In our Case we want to update a specific Game with new values. So you will have to give both an id AND a new Object to the controller.
 
 You can test your solutions against [GameControllerTest](src/test/java/com/ESD/steamed/GameControllerTest.java)s ``testUpdateGame()`` method.
 
 
-3. Alright, time to further develop an existing functionality. We are already able to get all games from our beautiful database. However a common thing we want to do is to filter or sort entries. Lets assume we have a couple of thousands of games, going on a hunt for a cheap game for you and the boys and girls to play on a saturday would be quite the task. So lets implement a way to only retrieve games which have a price lower than what we provide. 
-
-In the [GameRepository](src/main/java/com/ESD/steamed/game/GameRepository.java) class you need to define a method using Spring Data JPA which returns a List of games with the price lower than what is passed to the method. Within that file it is explained how to do so. But most important thing is, that Spring Data JPA allows you to write queries just by providing a method name In the [UserGame](src/main/java/com/ESD/steamed/userGame/UserGameRepository.java) Repository. there is a method for example which looks like this: ```List<UserGame> findByUser_Id(Long userId);``` it is needed to have this method because the UserGame entitty itself hold an id which is of course seperate from its userId or gameID. So in order to get a user´s library (List<UserGames> = is a Library) we have to have a method that returns all UserGames of a specific User. Which ```List<UserGame> findByUser_Id(Long userId);``` does. 
+3. Alright, time to further develop an existing functionality. We are already able to get all games from our beautiful database. However a common thing we want to do is to filter or sort entries. Lets assume we have a couple of thousands of games, going on a hunt for a cheap game for you and the boys and girls to play on a saturday would be quite the task. So lets implement a way to only retrieve games which have a price lower than what we provide. <br> <br> In the [GameRepository](src/main/java/com/ESD/steamed/game/GameRepository.java) class you need to define a method using Spring Data JPA which returns a List of games with the price lower than what is passed to the method. Within that file it is explained how to do so. But most important thing is, that Spring Data JPA allows you to write queries just by providing a method name. In the [UserGame](src/main/java/com/ESD/steamed/userGame/UserGameRepository.java) Repository there is a method which looks like this: ```List<UserGame> findByUser_Id(Long userId);``` it is needed to have this method because the UserGame entity itself hold an id which is separate from its userId or gameID. So in order to get a user´s library (List<UserGames> = is a Library) we have to have a method that returns all UserGames of a specific User. Which ```List<UserGame> findByUser_Id(Long userId);``` does. 
 
 
 4. Okay now that we have a way to retrieve all games that are below a certain price, go ahead and finish the ``getAllWithLowerPrice()`` method in the [GameService](src/main/java/com/ESD/steamed/game/GameService.java). 
 
 
-5. The final step is to change our existing ``getAll()`` is able to recieve a ``@RequestParameter`` (THIS IS NOT ``@RequestVariable`` or ``@PathVariable``) containing the maximum price (which needs to be optional). The controller then needs to either call ``getAllWithLowerPrice()`` or ``getAll()`` in the service depending on whether the ``maxPrice`` variable is present or not.
+5. The final step is to change our existing ``getAll()`` is able to receive a ``@RequestParameter`` (THIS IS NOT ``@RequestVariable`` or ``@PathVariable``) containing the maximum price (which needs to be optional). The controller then needs to either call ``getAllWithLowerPrice()`` or ``getAll()`` in the service depending on whether the ``maxPrice`` variable is present or not.
 
-Okay very nice! Out Backend is coming along nicely. Lets see what we can do now:
+Okay very nice! Our Backend is coming along nicely. Lets see what we can do now:
 
 - Create a Game
 - Update a Game
 - Retrieve a specific Game via its ID
 - Retrieve all existing Games
 
-If you made it until here, you have worked with all the basics and some advanced concepts of a typicall Spring REST Backend. You can be proud of yourself. Here is a Toast for you as a reward!
+If you made it until here, you have worked with all the basics and some advanced concepts of a typically Spring REST Backend. You can be proud of yourself. Here is a Toast for you as a reward!
 
 <details>
 <summary> Recieve your Toast!</summary>
 <img src="https://media1.tenor.com/m/Znyu2ndBCN0AAAAC/leonardo-dicaprio-toast.gif">
 </details>
-
-# Part 3
-This part is going to 
-
-Todo:
-
-- Write part 3 
-- seperate solutions md from original
-    - Part 3
-      - Repositories
-      - JPA repository
-      - CustomMethods
-
-- Containirize the Workshop
