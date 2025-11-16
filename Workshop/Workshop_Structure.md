@@ -1,15 +1,16 @@
-# Workshop
+# Whole day
 
-## Structure
+## Pre Workshop
 
+- Let participants dfownload the things
+
+
+## Presentation
 - First Let people pull
 
 ## Presentation
-- First Let people pull
 
-## Presentation
-
-20 Min
+20-25 Min
 
 - What is Spring 2 min
 - What is the boot 1 min
@@ -29,7 +30,7 @@
   - Relevance on the market
   - Comparison with other options
 
-- 20 min How to use it
+- 10-15 min How to use it
   - Annotations
   - The structure
     - Controller

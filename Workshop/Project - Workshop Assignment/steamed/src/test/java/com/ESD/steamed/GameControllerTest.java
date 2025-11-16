@@ -49,7 +49,7 @@ public class GameControllerTest {
             mockMvc.perform(post("/games")
                             .contentType(MediaType.APPLICATION_JSON)
                             .content(objectMapper.writeValueAsString(createDTO)))
-                    .andExpect(status().isOk());
+                    .andExpect(status().isCreated());
         }
     }
 
@@ -82,11 +82,9 @@ public class GameControllerTest {
                 .andExpect(jsonPath("$.length()").value(8));
     }
 
-
-
     @Test
     @Transactional
-    void testCreateAndGetGame() throws Exception {
+    void testGetGameById() throws Exception {
 
         GameCreateDTO newGame = new GameCreateDTO();
         newGame.setTitle("Hollow Knight");
@@ -114,6 +112,66 @@ public class GameControllerTest {
                 .andExpect(jsonPath("$.price").value(14.99))
                 .andExpect(jsonPath("$.developer").value("Team Cherry"))
                 .andExpect(jsonPath("$.releaseDate").value("2017-02-24"));
+    }
+
+    @Test
+    @Transactional
+    void testGetGameByWrongId() throws Exception {
+
+        mockMvc.perform(get("/games/{id}", 12))
+                .andExpect(status().isNotFound())
+                .andExpect(jsonPath("$.message").value("User not found with ID: " + 12));
+            
+    }
+
+    @Test
+    @Transactional
+    void testUpdateGame() throws Exception {
+
+        GameCreateDTO newGame = new GameCreateDTO();
+        newGame.setTitle("Hollow Knight");
+        newGame.setDescription("Epic 2D action-platformer with exploration and tight combat.");
+        newGame.setPrice(new BigDecimal("14.99"));
+        newGame.setReleaseDate(LocalDate.of(2017, 2, 24));
+        newGame.setDeveloper("Team Cherry");
+
+        String response = mockMvc.perform(post("/games")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(newGame)))
+                .andExpect(status().isCreated())
+                .andExpect(jsonPath("$.title").value("Hollow Knight"))
+                .andReturn()
+                .getResponse()
+                .getContentAsString();
+
+        Game createdGame = objectMapper.readValue(response, Game.class);
+
+        GameCreateDTO gameToUpdate = new GameCreateDTO();
+        gameToUpdate.setTitle("Hollow Knight 2");
+        gameToUpdate.setDescription("Boring second game of the series");
+        gameToUpdate.setPrice(new BigDecimal("25"));
+        gameToUpdate.setReleaseDate(LocalDate.of(2019, 4, 24));
+        gameToUpdate.setDeveloper("Team Cherry");
+
+        mockMvc.perform(put("/games/{id}", createdGame.getId())
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(gameToUpdate)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Hollow Knight 2"))
+                .andExpect(jsonPath("$.description").value("Boring second game of the series"))
+                .andExpect(jsonPath("$.price").value(25))
+                .andExpect(jsonPath("$.developer").value("Team Cherry"))
+                .andExpect(jsonPath("$.releaseDate").value("2019-04-24"));
+
+        Game updatedGame = objectMapper.readValue(response, Game.class);
+
+        mockMvc.perform(get("/games/{id}", createdGame.getId()))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.title").value("Hollow Knight 2"))
+                .andExpect(jsonPath("$.description").value("Boring second game of the series"))
+                .andExpect(jsonPath("$.price").value(25))
+                .andExpect(jsonPath("$.developer").value("Team Cherry"))
+                .andExpect(jsonPath("$.releaseDate").value("2019-04-24"));
     }
 
     @Test

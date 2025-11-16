@@ -5,6 +5,28 @@ The Database Schema:
 ![database.png](diagrams%2Fdatabase.png)()[]
 
 
+## Review
+fields:
+- private Long id;
+- private String title;
+- private Long rating;
+- private String comment;
+- private LocalTime created_at;
+
+Constraints:
+The title can only be 100 Characters long.
+The rating has to be from 1-3 (1 = Bad, 2 = Okay, 3 = Good) (Could have also been solved with an enum but is nice for the challenge)
+
+
+- 0-10 min: Introduction, project setup explanation (entities, repos, 1 basic controller), explain how tests work.
+
+- 10-35 min: Challenge 1: Build Publisher CRUD (with tests). Students work to make PublisherChallengeTest.java pass.
+
+- 45-55 min: Challenge 2: Quiz on existing data using the API. Give them 2-3 questions about the pre-populated data (including the new publishers and games linked to them) that require them to make API calls to find answers.
+
+- 55-60+ min: Solution walkthrough for the quiz, general Q&A, next steps/resources.
+
+
 ## The assignment:
 This Spring Boot Application is the backend for a Game Website in which you can buy and review games. 
 You might be familiar with some platform sounding pretty similar to "Steamed" ;) . 
@@ -60,6 +82,14 @@ Before we can test this method we have to make sure our Controller is able to **
 of this Workshop had done a good Job writing the tests this interdependency could have been avoided, however nobody 
 is perfect :)
 
+***Solution***:
+
+```Java
+@GetMapping
+public ResponseEntity<List<GameDTO>> getAll(){
+return ResponseEntity.ok(gameService.getAll());
+}
+```
 
 4. So let's do it then! Create a method called ```create()``` within [GameController](src/main/java/com/ESD/steamed/game/GameController.java)
 remember that this method needs to ***CREATE*** something in our Database, so you have to make sure to use the correct
@@ -103,6 +133,14 @@ And that is basically it. Have a look at the diagram below and move forward once
 </details>
 
 
+***Solution***
+
+```Java
+@PostMapping
+public ResponseEntity<GameDTO> create(@RequestBody GameCreateDTO gameCreateDTO){
+return ResponseEntity.status(HttpStatus.CREATED).body(gameService.create(gameCreateDTO));
+}
+```
 Okay that was quite alot. Lets see if everything works by running the ``testCreateGame()`` ``testCreateGame()`` method in our [GameControllerTest.java](src/test/java/com/ESD/steamed/GameControllerTest.java) and ``testGetAllGames()``.
 
 If the Test ran successfully **Congratulations!** you have reached the first Checkpoint! 
@@ -115,21 +153,72 @@ Up until now we have only worked within our GameController class. Lets see what 
 
 Once you have implemented the method you can test it via the ```testGetGameById()``` and ```testGetGameByWrongId()``` within the [GameControllerTest](src/test/java/com/ESD/steamed/GameControllerTest.java) class. 
 
+***Solution***
+```Java
+public GameDTO getById(Long id){
+        return gameMapper.toDto(gameRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException("Game not found.")));
+    }
+```
 
 2. There is another method in the [GameService](src/main/java/com/ESD/steamed/game/GameService.java) class in which an existing Game is supposed to be updated. It should retrieve a ``GameCreateDTO`` and update an existing Game entity with the new Values. If you have finished the method you can also finish the existing ``updateById()`` method in the [GameController](src/main/java/com/ESD/steamed/game/GameController.java) class. In the Controller method you will have to use a PUT request which is exactly for that purpose. Updating records. In our Case we want to update a specific Game with new values. So you will have to give both an id AND a new Object to the controller.
 
 You can test your solutions against [GameControllerTest](src/test/java/com/ESD/steamed/GameControllerTest.java)s ``testUpdateGame()`` method.
 
+***Solution***
+
+```Java
+@PutMapping("/{id}")
+    public ResponseEntity<GameDTO> updateById(@Valid @PathVariable Long id, @RequestBody GameCreateDTO gameCreateDTO){
+        return ResponseEntity.ok(gameService.updateById(id, gameCreateDTO));
+    }
+```
+
+```Java
+public GameDTO updateById(Long id, GameCreateDTO gameCreateDTO){
+        Game game = gameRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Game not found with ID: " + id));
+
+        game.setDescription(gameCreateDTO.getDescription());
+        game.setDeveloper(gameCreateDTO.getDeveloper());
+        game.setTitle(gameCreateDTO.getTitle());
+        game.setReleaseDate(gameCreateDTO.getReleaseDate());
+        game.setPrice(gameCreateDTO.getPrice());
+        return gameMapper.toDto(gameRepository.save(game));
+    }
+```
 
 3. Alright, time to further develop an existing functionality. We are already able to get all games from our beautiful database. However a common thing we want to do is to filter or sort entries. Lets assume we have a couple of thousands of games, going on a hunt for a cheap game for you and the boys and girls to play on a saturday would be quite the task. So lets implement a way to only retrieve games which have a price lower than what we provide. 
 
 In the [GameRepository](src/main/java/com/ESD/steamed/game/GameRepository.java) class you need to define a method using Spring Data JPA which returns a List of games with the price lower than what is passed to the method. Within that file it is explained how to do so. But most important thing is, that Spring Data JPA allows you to write queries just by providing a method name In the [UserGame](src/main/java/com/ESD/steamed/userGame/UserGameRepository.java) Repository. there is a method for example which looks like this: ```List<UserGame> findByUser_Id(Long userId);``` it is needed to have this method because the UserGame entitty itself hold an id which is of course seperate from its userId or gameID. So in order to get a user´s library (List<UserGames> = is a Library) we have to have a method that returns all UserGames of a specific User. Which ```List<UserGame> findByUser_Id(Long userId);``` does. 
 
+***Solution***
+```Java
+List<Game> findByPriceLessThan(BigDecimal price);
+```
 
 4. Okay now that we have a way to retrieve all games that are below a certain price, go ahead and finish the ``getAllWithLowerPrice`()`` method in the [GameService](src/main/java/com/ESD/steamed/game/GameService.java). 
 
+***Solution***
+```Java
+public List<GameDTO> getAllWithLowerPrice(BigDecimal price){
+        return gameMapper.toDtoList(gameRepository.findByPriceLessThan(price));
+    }
+```
 
 5. The final step is to change our existing ``getAll()`` is able to recieve a ``@RequestParameter`` (THIS IS NOT ``@RequestVariable`` or ``@PathVariable``) containing the maximum price (which needs to be optional). The controller then needs to either call ``getAllWithLowerPrice()`` or ``getAll()`` in the service depending on whether the ``maxPrice`` variable is present or not.
+
+***Solution***
+```Java
+@GetMapping
+    public ResponseEntity<List<GameDTO>> getAll(@RequestParam(required = false) BigDecimal maxPrice) {
+        if (maxPrice != null) {
+            return ResponseEntity.ok(gameService.getAllWithLowerPrice(maxPrice));
+        }
+        return ResponseEntity.ok(gameService.getAll());
+    }
+```
 
 Okay very nice! Out Backend is coming along nicely. Lets see what we can do now:
 
