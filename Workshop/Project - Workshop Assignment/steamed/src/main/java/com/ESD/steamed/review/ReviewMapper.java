@@ -3,16 +3,19 @@ package com.ESD.steamed.review;
 import com.ESD.steamed.game.Game;
 import com.ESD.steamed.game.GameDTO;
 import com.ESD.steamed.game.GameMapper;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-@AllArgsConstructor
 public class ReviewMapper {
+
     private final GameMapper gameMapper;
+
+    public ReviewMapper(GameMapper gameMapper) {
+        this.gameMapper = gameMapper;
+    }
 
     public ReviewDTO toDto(Review review) {
         if (review == null) return null;

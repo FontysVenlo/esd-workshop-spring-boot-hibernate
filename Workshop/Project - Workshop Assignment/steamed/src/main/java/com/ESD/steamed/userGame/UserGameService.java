@@ -3,7 +3,6 @@ package com.ESD.steamed.userGame;
 import com.ESD.steamed.exception.ResourceAlreadyExistsException;
 import com.ESD.steamed.exception.ResourceNotFoundException;
 import com.ESD.steamed.game.Game;
-import com.ESD.steamed.game.GameDTO;
 import com.ESD.steamed.game.GameRepository;
 import com.ESD.steamed.user.User;
 import com.ESD.steamed.user.UserRepository;
@@ -13,8 +12,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class UserGameService {

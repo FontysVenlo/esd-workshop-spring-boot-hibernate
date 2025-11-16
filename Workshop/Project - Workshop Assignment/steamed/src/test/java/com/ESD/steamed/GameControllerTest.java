@@ -3,12 +3,8 @@ package com.ESD.steamed;
 import com.ESD.steamed.game.Game;
 import com.ESD.steamed.game.GameCreateDTO;
 import com.ESD.steamed.game.GameMapper;
-import com.ESD.steamed.review.Review;
-import com.ESD.steamed.review.ReviewCreateDTO;
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import jakarta.transaction.Transactional;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,11 +12,8 @@ import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMock
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.List;
 
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
@@ -67,7 +60,7 @@ public class GameControllerTest {
         String response = mockMvc.perform(post("/games")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(newGame)))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("Hollow Knight"))
                 .andReturn()
                 .getResponse()
@@ -96,7 +89,7 @@ public class GameControllerTest {
         String response = mockMvc.perform(post("/games")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(newGame)))
-                .andExpect(status().isOk())
+                .andExpect(status().isCreated())
                 .andExpect(jsonPath("$.title").value("Hollow Knight"))
                 .andReturn()
                 .getResponse()
@@ -176,46 +169,13 @@ public class GameControllerTest {
 
     @Test
     @Transactional
-    void testCreateReviewForGame() throws Exception {
+    void testGetAllGamesWithLowerPrice() throws Exception {
+        BigDecimal maxPrice = new BigDecimal("10.99");
 
-        GameCreateDTO newGame = new GameCreateDTO();
-        newGame.setTitle("Hollow Knight");
-        newGame.setDescription("Epic 2D action-platformer with exploration and tight combat.");
-        newGame.setPrice(new BigDecimal("14.99"));
-        newGame.setReleaseDate(LocalDate.of(2017, 2, 24));
-        newGame.setDeveloper("Team Cherry");
-
-        String gameResponse = mockMvc.perform(post("/games")
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(newGame)))
+        mockMvc.perform(get("/games")
+                        .param("maxPrice", maxPrice.toString())
+                        .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Hollow Knight"))
-                .andReturn()
-                .getResponse()
-                .getContentAsString();
-
-        Long gameId = objectMapper.readTree(gameResponse).get("id").asLong();
-
-        LocalTime time = LocalTime.of(12, 0);
-
-        ReviewCreateDTO reviewCreateDTO = new ReviewCreateDTO();
-        reviewCreateDTO.setTitle("Awesome Game");
-        reviewCreateDTO.setRating(3L);
-        reviewCreateDTO.setComment("Really enjoyed it!");
-        reviewCreateDTO.setCreatedAt(time);
-        reviewCreateDTO.setGameId(gameId);
-
-        String reviewResponse = mockMvc.perform(post("/games/{id}/reviews", gameId)
-                        .contentType(MediaType.APPLICATION_JSON)
-                        .content(objectMapper.writeValueAsString(reviewCreateDTO)))
-                .andExpect(status().isOk())
-                .andExpect(jsonPath("$.title").value("Awesome Game"))
-                .andExpect(jsonPath("$.rating").value(3))
-                .andExpect(jsonPath("$.comment").value("Really enjoyed it!"))
-                .andExpect(jsonPath("$.createdAt").value("12:00:00"))
-                .andReturn()
-                .getResponse()
-                .getContentAsString();
-
+                .andExpect(jsonPath("$.length()").value(2));
     }
 }

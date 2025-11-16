@@ -3,17 +3,12 @@ package com.ESD.steamed.userGame;
 import com.ESD.steamed.game.Game;
 import com.ESD.steamed.user.User;
 import jakarta.persistence.*;
-import lombok.*;
 import org.hibernate.proxy.HibernateProxy;
 
 import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Table(name = "user_game")
 public class UserGame {
 
@@ -34,6 +29,54 @@ public class UserGame {
 
     private LocalDateTime lastPlayed;
     private Long playTimeHours;
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Game getGame() {
+        return game;
+    }
+
+    public void setGame(Game game) {
+        this.game = game;
+    }
+
+    public LocalDateTime getPurchaseDate() {
+        return purchaseDate;
+    }
+
+    public void setPurchaseDate(LocalDateTime purchaseDate) {
+        this.purchaseDate = purchaseDate;
+    }
+
+    public LocalDateTime getLastPlayed() {
+        return lastPlayed;
+    }
+
+    public void setLastPlayed(LocalDateTime lastPlayed) {
+        this.lastPlayed = lastPlayed;
+    }
+
+    public Long getPlayTimeHours() {
+        return playTimeHours;
+    }
+
+    public void setPlayTimeHours(Long playTimeHours) {
+        this.playTimeHours = playTimeHours;
+    }
 
     @Override
     public String toString() {

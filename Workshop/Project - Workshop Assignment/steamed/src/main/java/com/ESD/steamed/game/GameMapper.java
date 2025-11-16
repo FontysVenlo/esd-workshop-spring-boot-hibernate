@@ -29,8 +29,7 @@ public class GameMapper {
         return game;
     }
 
-    public
-    List<GameDTO> toDtoList(List<Game> gameList) {
+    public List<GameDTO> toDtoList(List<Game> gameList) {
         return gameList.stream()
                 .map(this::toDto)
                 .collect(Collectors.toList());

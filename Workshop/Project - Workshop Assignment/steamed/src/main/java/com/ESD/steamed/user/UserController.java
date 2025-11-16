@@ -1,7 +1,6 @@
 package com.ESD.steamed.user;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -15,12 +14,12 @@ public class UserController {
     }
 
     @PostMapping
-    public ResponseEntity<UserDTO> save(@RequestBody UserCreateDTO userCreateDTO){
+    public ResponseEntity<UserDTO> save(@RequestBody UserCreateDTO userCreateDTO) {
         return ResponseEntity.ok(userService.save(userCreateDTO));
     }
 
     @GetMapping(path = "/{id}")
-    public ResponseEntity<UserDTO> getById(@PathVariable Long id){
+    public ResponseEntity<UserDTO> getById(@PathVariable Long id) {
         return ResponseEntity.ok(userService.getById(id));
     }
 }

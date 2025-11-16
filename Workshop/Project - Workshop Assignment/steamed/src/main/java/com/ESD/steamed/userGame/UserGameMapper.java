@@ -6,18 +6,22 @@ import com.ESD.steamed.game.GameMapper;
 import com.ESD.steamed.game.GameRepository;
 import com.ESD.steamed.user.User;
 import com.ESD.steamed.user.UserRepository;
-import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;
 
 @Component
-@AllArgsConstructor
 public class UserGameMapper {
 
     private final GameMapper gameMapper;
     private final GameRepository gameRepository;
     private final UserRepository userRepository;
+
+    public UserGameMapper(GameMapper gameMapper, GameRepository gameRepository, UserRepository userRepository) {
+        this.gameMapper = gameMapper;
+        this.gameRepository = gameRepository;
+        this.userRepository = userRepository;
+    }
 
     public UserGameDTO toDto(UserGame userGame) {
 
